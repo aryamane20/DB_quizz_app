@@ -1,0 +1,13 @@
+question,answer,level
+What is the full form of HTTP?,HyperText Transfer Protocol,1
+What is a variable in programming?,A named container used to store data values,1
+Explain object-oriented programming in one line.,A paradigm that organizes code around objects and classes,2
+What is encapsulation?,Bundling data and methods while restricting direct access,2
+What is a primary key?,A unique identifier for each row in a table,3
+Why do we use SQL joins?,To combine rows from related tables,3
+What does API stand for?,Application Programming Interface,4
+What is the purpose of JWT?,To securely transmit user identity and claims,4
+What is normalization in databases?,Structuring tables to reduce redundancy and improve integrity,5
+What is indexing in SQL?,A data structure that speeds up query lookups,5
+What is asynchronous programming?,Running tasks without blocking the main execution flow,6
+What is scalability in software systems?,Ability of a system to handle growing load efficiently,6
