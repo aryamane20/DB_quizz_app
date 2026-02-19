@@ -256,6 +256,35 @@ textarea {
   padding: 12px;
 }
 
+.upload-confirm-box {
+  margin-top: 12px;
+  border: 1px solid #8fd2ea;
+  border-radius: 10px;
+  background: #f5fbff;
+  padding: 12px;
+}
+
+.upload-confirm-box p {
+  margin: 6px 0 0;
+  color: #1d5c76;
+}
+
+.upload-confirm-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.text-btn {
+  border: none;
+  background: transparent;
+  color: #1d5c76;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 8px 10px;
+}
+
 .admin-toolbar {
   margin-bottom: 12px;
 }

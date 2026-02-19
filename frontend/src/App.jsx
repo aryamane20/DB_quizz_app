@@ -36,6 +36,7 @@ function App() {
   const [uploadReport, setUploadReport] = useState(null);
   const [uploadError, setUploadError] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [uploadConfirmOpen, setUploadConfirmOpen] = useState(false);
   const [adminQuestions, setAdminQuestions] = useState([]);
   const [adminQuestionError, setAdminQuestionError] = useState("");
   const [adminLevelFilter, setAdminLevelFilter] = useState("all");
@@ -259,18 +260,20 @@ function App() {
       setUploadError("Please select a CSV file.");
       return;
     }
+    setUploadError("");
+    setUploadConfirmOpen(true);
+  }
 
+  async function executeAdminUpload(mode) {
     setUploadError("");
     setUploading(true);
     setUploadReport(null);
+    setUploadConfirmOpen(false);
 
     try {
       const formData = new FormData();
       formData.append("file", uploadFile);
-      const shouldReplace = window.confirm(
-        "Do you want to replace existing questions?\n\nPress OK to REPLACE existing questions.\nPress Cancel to KEEP existing questions and append."
-      );
-      formData.append("mode", shouldReplace ? "replace" : "append");
+      formData.append("mode", mode);
 
       const response = await fetch(`${API_BASE_URL}/admin/questions/upload`, {
         method: "POST",
@@ -493,6 +496,37 @@ function App() {
                 {uploading ? "Uploading..." : "Upload CSV"}
               </button>
             </form>
+            {uploadConfirmOpen ? (
+              <div className="upload-confirm-box">
+                <div className="compare-title">How should we import this CSV?</div>
+                <p>
+                  Choose whether to keep existing questions or replace them with this upload.
+                </p>
+                <div className="upload-confirm-actions">
+                  <button
+                    className="outline-btn"
+                    onClick={() => executeAdminUpload("append")}
+                    disabled={uploading}
+                  >
+                    Keep Existing (Append)
+                  </button>
+                  <button
+                    className="primary-btn"
+                    onClick={() => executeAdminUpload("replace")}
+                    disabled={uploading}
+                  >
+                    Replace Existing
+                  </button>
+                  <button
+                    className="text-btn"
+                    onClick={() => setUploadConfirmOpen(false)}
+                    disabled={uploading}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            ) : null}
             {uploadError ? <p className="error-text">{uploadError}</p> : null}
             {uploadReport ? (
               <div className="report-box">
